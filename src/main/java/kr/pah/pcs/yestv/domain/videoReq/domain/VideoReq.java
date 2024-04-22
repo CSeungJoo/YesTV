@@ -1,6 +1,7 @@
 package kr.pah.pcs.yestv.domain.videoReq.domain;
 
 import jakarta.persistence.*;
+import kr.pah.pcs.yestv.domain.location.domain.Location;
 import kr.pah.pcs.yestv.domain.user.entity.User;
 import lombok.*;
 
@@ -26,7 +27,12 @@ public class VideoReq {
     @Column
     private LocalDateTime startTime;
 
-    @Column LocalDateTime endTime;
+    @Column
+    private LocalDateTime endTime;
+
+    @ManyToOne
+    @JoinColumn(name = "location_id")
+    private Location location;
 
     @ManyToOne
     @JoinColumn(name = "users_id")

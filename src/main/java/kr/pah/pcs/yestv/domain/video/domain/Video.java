@@ -2,6 +2,7 @@ package kr.pah.pcs.yestv.domain.video.domain;
 
 import jakarta.persistence.*;
 import kr.pah.pcs.yestv.domain.cam.domain.Cam;
+import kr.pah.pcs.yestv.domain.location.domain.Location;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,4 +35,8 @@ public class Video {
 
     @Transient
     private MultipartFile video;
+
+    @ManyToOne
+    @JoinColumn(name = "location_id")
+    private Location location;
 }
