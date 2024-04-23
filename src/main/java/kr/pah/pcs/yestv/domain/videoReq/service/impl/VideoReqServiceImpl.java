@@ -41,7 +41,7 @@ public class VideoReqServiceImpl implements VideoReqService {
 
     @Override
     public List<VideoReq> getVideosReqByStartTimeBetweenEndTime(LocalDateTime startTime, LocalDateTime endTime) {
-        return videoReqRepository.getVideosByStartTimeBetweenEndTime(startTime, endTime);
+        return videoReqRepository.findAllByStartTimeBetweenEndTime(startTime, endTime);
     }
 
     @Override
