@@ -30,7 +30,7 @@ public class CamController {
 
         ReturnCamDto returnCamDto = new ReturnCamDto(cam);
 
-        return ResponseEntity.ok(new Result<>(returnCamDto, false));
+        return ResponseEntity.ok(new Result<>(returnCamDto));
     }
 
     @GetMapping("/getCam/{locationIdx}")
@@ -42,14 +42,14 @@ public class CamController {
                 .map(ReturnCamDto::new)
                 .toList();
 
-        return ResponseEntity.ok(new Result<>(returnCamDtos, false));
+        return ResponseEntity.ok(new Result<>(returnCamDtos));
     }
 
     @PostMapping("/create")
     public ResponseEntity<?> createCam(@Valid @RequestBody CreateCamDto createCamDto) {
         Cam cam = camService.createCam(createCamDto);
 
-        return ResponseEntity.ok(new Result<>(cam, false));
+        return ResponseEntity.ok(new Result<>(cam));
     }
 
     @PutMapping("/update")
@@ -60,6 +60,6 @@ public class CamController {
 
         camService.updateCamBy(cam);
 
-        return ResponseEntity.ok(new Result<>(cam, false));
+        return ResponseEntity.ok(new Result<>(cam));
     }
 }

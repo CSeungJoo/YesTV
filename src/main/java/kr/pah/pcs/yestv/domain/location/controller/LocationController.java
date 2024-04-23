@@ -31,7 +31,7 @@ public class LocationController {
                     .name(location.getName())
                     .build();
 
-            return ResponseEntity.ok(new Result<>(returnLocationDto, false));
+            return ResponseEntity.ok(new Result<>(returnLocationDto));
         }catch (IllegalStateException e) {
             return ResponseEntity.ok(new Result<>(e.getMessage(), true));
         }
@@ -42,7 +42,7 @@ public class LocationController {
         try {
             Page<Location> locations = locationService.getLocations(pageable);
 
-            return ResponseEntity.ok(new Result<>(locations, false));
+            return ResponseEntity.ok(new Result<>(locations));
         }catch (IllegalStateException e) {
             return ResponseEntity.ok(new Result<>(e.getMessage(), true));
         }
@@ -59,7 +59,7 @@ public class LocationController {
                     .name(location.getName())
                     .build();
 
-            return ResponseEntity.ok(new Result<>(returnLocationDto, false));
+            return ResponseEntity.ok(new Result<>(returnLocationDto));
         }catch (IllegalStateException e) {
             return ResponseEntity.ok(new Result<>(e.getMessage(), true));
         }
@@ -80,7 +80,7 @@ public class LocationController {
                     .name(location.getName())
                     .build();
 
-            return ResponseEntity.ok(new Result<>(returnLocationDto, false));
+            return ResponseEntity.ok(new Result<>(returnLocationDto));
         }catch (IllegalStateException e) {
             return ResponseEntity.ok(new Result<>(e.getMessage(), true));
         }
@@ -92,7 +92,7 @@ public class LocationController {
 
             locationService.deleteLocation(idx);
 
-            return ResponseEntity.ok(new Result<>("정상적으로 변경되었습니다.", false));
+            return ResponseEntity.ok(new Result<>("정상적으로 변경되었습니다."));
         }catch (IllegalStateException e) {
             return ResponseEntity.ok(new Result<>(e.getMessage(), true));
         }
