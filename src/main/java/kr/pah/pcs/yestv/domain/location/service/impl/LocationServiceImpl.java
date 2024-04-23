@@ -1,6 +1,7 @@
 package kr.pah.pcs.yestv.domain.location.service.impl;
 
 import kr.pah.pcs.yestv.domain.location.domain.Location;
+import kr.pah.pcs.yestv.domain.location.dto.CreateLocationDto;
 import kr.pah.pcs.yestv.domain.location.repository.LocationRepository;
 import kr.pah.pcs.yestv.domain.location.service.LocationService;
 import lombok.RequiredArgsConstructor;
@@ -15,20 +16,29 @@ public class LocationServiceImpl implements LocationService {
     private final LocationRepository locationRepository;
 
     @Override
-    public Location createLocation(Location location) {
+    public Location createLocation(CreateLocationDto createLocationDto) {
+        Location location = Location.builder()
+                .name(createLocationDto.getName())
+                .build();
+
         return locationRepository.save(location);
     }
 
     @Override
     public Location getLocationByIdx(int idx) {
-        return locationRepository.findById(idx).orElseThrow(
+        Location location = locationRepository.findById(idx).orElseThrow(
                 () -> new IllegalStateException("존재하지 않은 장소입니다.")
         );
+
+        if (!location.isDelete())
+            return location;
+
+        throw new IllegalStateException("존재하지 않은 장소입니다.");
     }
 
     @Override
     public Page<Location> getLocations(Pageable pageable) {
-        return locationRepository.findAll(pageable);
+        return locationRepository.findLocationsByDeleteIsFalse(pageable);
     }
 
     @Override
@@ -38,6 +48,6 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public void deleteLocation(int idx) {
-        locationRepository.deleteById(idx);
+        getLocationByIdx(idx).changeDelete();
     }
 }

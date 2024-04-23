@@ -20,6 +20,9 @@ public class Location {
     @Column
     private String name;
 
+    @Column
+    private boolean isDelete;
+
     @OneToMany
     @JoinColumn(name = "cam_id")
     private List<Cam> cam;
@@ -31,4 +34,17 @@ public class Location {
     @OneToMany
     @JoinColumn(name = "videos_id")
     private List<Video> videos;
+
+    @PrePersist
+    public void init() {
+        isDelete = false;
+    }
+
+    public void changeDelete() {
+        isDelete = !isDelete;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
