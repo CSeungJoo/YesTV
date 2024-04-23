@@ -3,7 +3,7 @@ package kr.pah.pcs.yestv.domain.user.entity;
 import jakarta.persistence.*;
 import kr.pah.pcs.yestv.domain.location.domain.Location;
 import kr.pah.pcs.yestv.domain.video.domain.Video;
-import kr.pah.pcs.yestv.domain.video.model.Role;
+import kr.pah.pcs.yestv.domain.model.Role;
 import lombok.*;
 
 import java.util.List;
