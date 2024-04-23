@@ -46,14 +46,14 @@ public class CamController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> createCam(@Valid CreateCamDto createCamDto) {
+    public ResponseEntity<?> createCam(@Valid @RequestBody CreateCamDto createCamDto) {
         Cam cam = camService.createCam(createCamDto);
 
         return ResponseEntity.ok(new Result<>(cam, false));
     }
 
     @PutMapping("/update")
-    public ResponseEntity<?> updateCam(@Valid UpdateCamDto updateCamDto) {
+    public ResponseEntity<?> updateCam(@Valid @RequestBody UpdateCamDto updateCamDto) {
         Cam cam = camService.getCamByIdx(updateCamDto.getIdx());
 
         cam.modifiedCam(cam.getName(), cam.getIp());
