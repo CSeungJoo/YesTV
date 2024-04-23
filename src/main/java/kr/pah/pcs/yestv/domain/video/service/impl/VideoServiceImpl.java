@@ -8,6 +8,7 @@ import kr.pah.pcs.yestv.domain.video.repository.VideoRepository;
 import kr.pah.pcs.yestv.domain.video.service.VideoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -46,10 +47,7 @@ public class VideoServiceImpl implements VideoService {
             Path path = Paths.get(createVideo.getUrl());
             Files.write(path, video.getBytes());
         }catch (IOException e) {
-//          디버그 코드
-            e.printStackTrace();
-
-//            throw new IllegalStateException("동영상을 저장하지 못했습니다.");
+            throw new IllegalStateException("동영상을 저장하지 못했습니다.");
         }
 
         return videoRepository.save(createVideo);
@@ -63,6 +61,20 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
+    public byte[] getVideoFileByIdx(int idx) {
+        Video video = getVideoByIdx(idx);
+
+        try {
+            ClassPathResource resource = new ClassPathResource(video.getUrl());
+            Path path = resource.getFile().toPath();
+
+            return Files.readAllBytes(path);
+        } catch (IOException e) {
+            throw new IllegalStateException("알수없는 오류가 발생하였습니다.");
+        }
+    }
+
+    @Override
     public List<Video> getVideosByStartTimeBetweenEndTime(LocalDateTime startTime, LocalDateTime endTime) {
         return videoRepository.findAllByStartTimeBetweenEndTime(startTime, endTime);
     }
@@ -73,12 +85,8 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public Video updateVideo(Video video) {
-        return videoRepository.save(video);
-    }
-
-    @Override
     public void deleteVideo(int idx) {
-        videoRepository.deleteById(idx);
+        getVideoByIdx(idx)
+                .changeDelete();
     }
 }

@@ -14,8 +14,9 @@ public interface VideoService {
 
     Video createVideo(MultipartFile video, Cam cam);
     Video getVideoByIdx(int idx);
+
+    byte[] getVideoFileByIdx(int idx);
     List<Video> getVideosByStartTimeBetweenEndTime(LocalDateTime startTime, LocalDateTime endTime);
     Page<Video> getVideosByLocation(Location location, Pageable pageable);
-    Video updateVideo(Video video);
     void deleteVideo(int idx);
 }

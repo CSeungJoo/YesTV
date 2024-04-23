@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @Builder
 public class Video {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idx;
+    private int idx;
 
     @OneToOne
     @JoinColumn(name = "cam_id")
@@ -33,10 +33,22 @@ public class Video {
     @Column
     private String url;
 
+    @Column
+    private boolean isDelete;
+
     @Transient
     private MultipartFile video;
 
     @ManyToOne
     @JoinColumn(name = "location_id")
     private Location location;
+
+    @PrePersist
+    private void init() {
+        isDelete = false;
+    }
+
+    public void changeDelete() {
+        isDelete = !isDelete;
+    }
 }
