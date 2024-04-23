@@ -8,14 +8,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class LocationServiceImpl implements LocationService {
 
     private final LocationRepository locationRepository;
 
     @Override
+    @Transactional
     public Location createLocation(CreateLocationDto createLocationDto) {
         Location location = Location.builder()
                 .name(createLocationDto.getName())
@@ -42,11 +45,13 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
+    @Transactional
     public Location updateLocation(Location location) {
         return locationRepository.save(location);
     }
 
     @Override
+    @Transactional
     public void deleteLocation(int idx) {
         getLocationByIdx(idx).changeDelete();
     }
