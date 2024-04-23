@@ -22,6 +22,9 @@ public class User {
     private String username;
 
     @Column
+    private String nickname;
+
+    @Column
     private String password;
 
     @Column
@@ -30,6 +33,9 @@ public class User {
     @Column
     private Role role;
 
+    @Column
+    private boolean isDelete;
+
     @OneToMany
     @JoinColumn(name = "video_id")
     private List<Video> Video;
@@ -37,4 +43,9 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "location_id")
     private Location location;
+
+    @PrePersist
+    private void init() {
+        isDelete = false;
+    }
 }

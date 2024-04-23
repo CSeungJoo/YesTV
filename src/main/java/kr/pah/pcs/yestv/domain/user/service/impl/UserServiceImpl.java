@@ -19,6 +19,7 @@ public class UserServiceImpl implements UserService {
 
         User user = User.builder()
                 .username(createUserDto.getUsername())
+                .nickname(createUserDto.getNickname())
 //               시큐리티 적용후 암호화 적용
                 .password(createUserDto.getPassword())
                 .email(createUserDto.getEmail())

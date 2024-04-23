@@ -9,8 +9,7 @@ import lombok.Data;
 @Builder
 @NotNull
 @AllArgsConstructor
-public class CreateUserDto {
-    private String username;
+public class UpdateUserDto {
     private String nickname;
     private String password;
     private String email;
