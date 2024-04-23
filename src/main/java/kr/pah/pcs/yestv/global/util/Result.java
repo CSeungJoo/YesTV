@@ -12,4 +12,9 @@ public class Result<T> {
         this.message = message;
         this.isError = isError;
     }
+
+    public Result(T message) {
+        this.message = message;
+        this.isError = false;
+    }
 }
