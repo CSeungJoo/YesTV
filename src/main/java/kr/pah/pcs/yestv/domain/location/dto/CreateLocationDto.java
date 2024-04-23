@@ -1,4 +1,4 @@
-package kr.pah.pcs.yestv.domain.cam.dto;
+package kr.pah.pcs.yestv.domain.location.dto;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -9,8 +9,6 @@ import lombok.Data;
 @Builder
 @NotNull
 @AllArgsConstructor
-public class UpdateCamDto {
-    private int idx;
+public class CreateLocationDto {
     private String name;
-    private String ip;
 }

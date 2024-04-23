@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import kr.pah.pcs.yestv.domain.cam.domain.Cam;
 import kr.pah.pcs.yestv.domain.location.domain.Location;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
@@ -11,8 +12,9 @@ import lombok.Getter;
 @Data
 @Builder
 @NotNull
+@AllArgsConstructor
 public class ReturnCamDto {
-    private Integer idx;
+    private int idx;
     private String name;
     private String ip;
     private String detailedLocation;
