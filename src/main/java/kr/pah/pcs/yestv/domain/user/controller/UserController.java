@@ -20,7 +20,7 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/getUser/{idx}")
+    @GetMapping("/get-user/{idx}")
     public ResponseEntity<?> getUserById(@Valid @PathVariable int idx) {
         try {
             User user = userService.getUserByIdx(idx);

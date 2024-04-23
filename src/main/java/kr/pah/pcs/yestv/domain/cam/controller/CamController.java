@@ -24,7 +24,7 @@ public class CamController {
     private final CamService camService;
     private final LocationService locationService;
 
-    @GetMapping("/getCam/{idx}")
+    @GetMapping("/get-cam/{idx}")
     public ResponseEntity<?> getCam(@Valid @PathVariable Integer idx) {
         Cam cam = camService.getCamByIdx(idx);
 
@@ -33,7 +33,7 @@ public class CamController {
         return ResponseEntity.ok(new Result<>(returnCamDto));
     }
 
-    @GetMapping("/getCam/{locationIdx}")
+    @GetMapping("/get-cam-by-location/{locationIdx}")
     public ResponseEntity<?> getCamsByLocation(@Valid @PathVariable Integer locationIdx) {
         Location location = locationService.getLocationByIdx(locationIdx);
         List<Cam> cams = camService.getCamsByLocation(location);

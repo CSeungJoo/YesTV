@@ -21,7 +21,7 @@ public class LocationController {
 
     private final LocationService locationService;
 
-    @GetMapping("/getLocation/{idx}")
+    @GetMapping("/get-location/{idx}")
     public ResponseEntity<?> getLocationByIdx(@Valid @PathVariable int idx) {
         try {
             Location location = locationService.getLocationByIdx(idx);
@@ -37,7 +37,7 @@ public class LocationController {
         }
     }
 
-    @GetMapping("/getLocations")
+    @GetMapping("/get-locations")
     public ResponseEntity<?> getLocations(@PageableDefault Pageable pageable) {
         try {
             Page<Location> locations = locationService.getLocations(pageable);
