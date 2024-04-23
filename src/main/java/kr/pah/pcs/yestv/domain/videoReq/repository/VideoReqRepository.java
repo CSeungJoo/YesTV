@@ -9,8 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface VideoReqRepository extends JpaRepository<VideoReq, Integer> {
-    List<VideoReq> getVideosByStartTimeBetweenEndTime(LocalDateTime startTime, LocalDateTime endTime);
-
+public interface VideoReqRepository extends JpaRepository<VideoReq, Integer>, CustomVideoReqRepository {
     Page<VideoReq> findByLocation(Location location, Pageable pageable);
 }
