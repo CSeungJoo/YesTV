@@ -1,15 +1,14 @@
 package kr.pah.pcs.yestv.domain.user.controller;
 
+import jakarta.annotation.security.PermitAll;
 import jakarta.validation.Valid;
 import kr.pah.pcs.yestv.domain.user.dto.CreateUserDto;
 import kr.pah.pcs.yestv.domain.user.dto.ReturnUserDto;
 import kr.pah.pcs.yestv.domain.user.dto.UpdateUserDto;
 import kr.pah.pcs.yestv.domain.user.entity.User;
 import kr.pah.pcs.yestv.domain.user.service.UserService;
-import kr.pah.pcs.yestv.global.util.Result;
+import kr.pah.pcs.yestv.global.common.Result;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +19,7 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/get-user/{idx}")
+    @GetMapping("/get-ser/{idx}")
     public ResponseEntity<?> getUserById(@Valid @PathVariable int idx) {
         try {
             User user = userService.getUserByIdx(idx);
@@ -39,6 +38,7 @@ public class UserController {
     }
 
     @PostMapping("/create")
+    @PermitAll
     public ResponseEntity<?> createUser(@RequestBody CreateUserDto createUserDto) {
         User user = userService.createUser(createUserDto);
 

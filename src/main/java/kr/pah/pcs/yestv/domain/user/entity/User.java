@@ -36,6 +36,9 @@ public class User {
     @Column
     private boolean isDelete;
 
+    @Column
+    private boolean isActive;
+
     @OneToMany
     @JoinColumn(name = "video_id")
     private List<Video> Video;
@@ -47,5 +50,14 @@ public class User {
     @PrePersist
     private void init() {
         isDelete = false;
+        isActive = false;
+    }
+
+    public void changeActive() {
+        isActive = !isActive;
+    }
+
+    public void changeDelete() {
+        isDelete = !isDelete;
     }
 }

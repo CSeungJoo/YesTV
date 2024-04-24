@@ -1,6 +1,5 @@
-package kr.pah.pcs.yestv.global.util;
+package kr.pah.pcs.yestv.global.common;
 
-import lombok.Data;
 import lombok.Getter;
 
 @Getter

@@ -7,15 +7,12 @@ import kr.pah.pcs.yestv.domain.videoReq.domain.VideoReq;
 import kr.pah.pcs.yestv.domain.videoReq.dto.CreateVideoReqDto;
 import kr.pah.pcs.yestv.domain.videoReq.dto.ReturnVideoReqDto;
 import kr.pah.pcs.yestv.domain.videoReq.service.VideoReqService;
-import kr.pah.pcs.yestv.global.util.Result;
+import kr.pah.pcs.yestv.global.common.Result;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;

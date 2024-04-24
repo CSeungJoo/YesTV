@@ -8,13 +8,12 @@ import kr.pah.pcs.yestv.domain.cam.dto.UpdateCamDto;
 import kr.pah.pcs.yestv.domain.cam.service.CamService;
 import kr.pah.pcs.yestv.domain.location.domain.Location;
 import kr.pah.pcs.yestv.domain.location.service.LocationService;
-import kr.pah.pcs.yestv.global.util.Result;
+import kr.pah.pcs.yestv.global.common.Result;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor

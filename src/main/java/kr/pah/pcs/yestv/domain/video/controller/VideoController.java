@@ -8,7 +8,7 @@ import kr.pah.pcs.yestv.domain.location.service.LocationService;
 import kr.pah.pcs.yestv.domain.video.domain.Video;
 import kr.pah.pcs.yestv.domain.video.dto.ReturnVideoDto;
 import kr.pah.pcs.yestv.domain.video.service.VideoService;
-import kr.pah.pcs.yestv.global.util.Result;
+import kr.pah.pcs.yestv.global.common.Result;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
