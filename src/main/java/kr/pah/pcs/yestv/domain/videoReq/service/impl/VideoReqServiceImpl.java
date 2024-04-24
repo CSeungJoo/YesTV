@@ -50,11 +50,6 @@ public class VideoReqServiceImpl implements VideoReqService {
     }
 
     @Override
-    public VideoReq updateVideoReq(VideoReq videoReq) {
-        return videoReqRepository.save(videoReq);
-    }
-
-    @Override
     public void deleteVideoReq(int idx) {
         videoReqRepository.deleteById(idx);
     }

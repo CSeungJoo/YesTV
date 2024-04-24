@@ -15,6 +15,5 @@ public interface VideoReqService {
     VideoReq getVideoReqByIdx(int idx);
     List<VideoReq> getVideosReqByStartTimeBetweenEndTime(LocalDateTime startTime, LocalDateTime endTime);
     Page<VideoReq> getVideoReqsByLocation(Location location, Pageable pageable);
-    VideoReq updateVideoReq(VideoReq videoReq);
     void deleteVideoReq(int idx);
 }

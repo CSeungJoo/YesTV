@@ -16,7 +16,7 @@ import java.util.List;
 @Setter
 public class VideoReq {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idx;
+    private int idx;
 
     @Column
     private String title;
