@@ -42,7 +42,6 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    @PermitAll
     public ResponseEntity<?> createUser(@RequestBody CreateUserDto createUserDto) {
         User user = userService.createUser(createUserDto);
 
