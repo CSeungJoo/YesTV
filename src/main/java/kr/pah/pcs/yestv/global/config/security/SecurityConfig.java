@@ -11,7 +11,6 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true) //secured 어노테이션 활성화, preAuthorize, postAuthorize 어노테이션 활성화
 public class SecurityConfig {
 
     @Bean
@@ -23,19 +22,12 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(req -> {
-                    req
-                            .requestMatchers("/login", "/logout", "/register").permitAll()
-                            .requestMatchers("/static/**").permitAll()
-                            .anyRequest().authenticated();
-                })
-                .formLogin(loginConfigurer -> {
-                    loginConfigurer
-                            .loginPage("/login").permitAll()
-                            .usernameParameter("email")
-                            .loginProcessingUrl("/login").permitAll()
-                            .defaultSuccessUrl("/");
-                });
+                .authorizeHttpRequests(req -> req
+                        .requestMatchers("/login", "/logout", "/user/create").permitAll()
+                        .anyRequest().authenticated())
+                .formLogin(loginConfigurer -> loginConfigurer
+                        .usernameParameter("username")
+                        .defaultSuccessUrl("/"));
         return http.build();
     }
 }
