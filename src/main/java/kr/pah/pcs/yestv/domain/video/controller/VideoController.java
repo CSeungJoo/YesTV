@@ -5,10 +5,12 @@ import kr.pah.pcs.yestv.domain.cam.domain.Cam;
 import kr.pah.pcs.yestv.domain.cam.service.CamService;
 import kr.pah.pcs.yestv.domain.location.domain.Location;
 import kr.pah.pcs.yestv.domain.location.service.LocationService;
+import kr.pah.pcs.yestv.domain.user.entity.User;
 import kr.pah.pcs.yestv.domain.video.domain.Video;
 import kr.pah.pcs.yestv.domain.video.dto.ReturnVideoDto;
 import kr.pah.pcs.yestv.domain.video.service.VideoService;
 import kr.pah.pcs.yestv.global.common.Result;
+import kr.pah.pcs.yestv.global.common.Util;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,6 +33,7 @@ public class VideoController {
     private final VideoService videoService;
     private final CamService camService;
     private final LocationService locationService;
+    private final Util util;
 
     @GetMapping("/get-video/{idx}")
     public ResponseEntity<?> getVideo(@Valid @PathVariable int idx) {
@@ -64,7 +67,19 @@ public class VideoController {
         }catch (IllegalStateException e) {
             return ResponseEntity.ok(new Result<>(e.getMessage(), true));
         }
+    }
 
+    @GetMapping("/get-my-videos")
+    public ResponseEntity<?> getMyVideo() {
+        try {
+            User user = util.getLoginUser();
+
+            List<Video> videos = user.getVideos();
+
+            return ResponseEntity.ok(new Result<>(videos));
+        }catch (IllegalStateException e) {
+            return ResponseEntity.ok(new Result<>(e.getMessage(), true));
+        }
     }
 
     @PostMapping("/create")
