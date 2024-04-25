@@ -50,6 +50,7 @@ public class User {
 
     @PrePersist
     private void init() {
+        role = Role.USER;
         isDelete = false;
         isActive = false;
     }
