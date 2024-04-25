@@ -2,6 +2,7 @@ package kr.pah.pcs.yestv.domain.user.entity;
 
 import jakarta.persistence.*;
 import kr.pah.pcs.yestv.domain.location.domain.Location;
+import kr.pah.pcs.yestv.domain.user.dto.UpdateUserDto;
 import kr.pah.pcs.yestv.domain.video.domain.Video;
 import kr.pah.pcs.yestv.domain.model.Role;
 import lombok.*;
@@ -41,7 +42,7 @@ public class User {
 
     @OneToMany
     @JoinColumn(name = "video_id")
-    private List<Video> Video;
+    private List<Video> videos;
 
     @ManyToOne
     @JoinColumn(name = "location_id")
@@ -59,5 +60,11 @@ public class User {
 
     public void changeDelete() {
         isDelete = !isDelete;
+    }
+
+    public void updateUser(UpdateUserDto updateUserDto) {
+        this.nickname = updateUserDto.getNickname();
+        this.password = updateUserDto.getPassword();
+        this.email = updateUserDto.getEmail();
     }
 }
