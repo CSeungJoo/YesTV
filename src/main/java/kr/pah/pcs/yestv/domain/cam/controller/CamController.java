@@ -25,40 +25,60 @@ public class CamController {
 
     @GetMapping("/get-cam/{idx}")
     public ResponseEntity<?> getCam(@Valid @PathVariable Integer idx) {
-        Cam cam = camService.getCamByIdx(idx);
+        try {
 
-        ReturnCamDto returnCamDto = new ReturnCamDto(cam);
+            Cam cam = camService.getCamByIdx(idx);
 
-        return ResponseEntity.ok(new Result<>(returnCamDto));
+            ReturnCamDto returnCamDto = new ReturnCamDto(cam);
+
+            return ResponseEntity.ok(new Result<>(returnCamDto));
+        }catch (IllegalStateException e) {
+            return ResponseEntity.ok(new Result<>(e.getMessage(), true));
+        }
     }
 
     @GetMapping("/get-cam-by-location/{locationIdx}")
     public ResponseEntity<?> getCamsByLocation(@Valid @PathVariable Integer locationIdx) {
-        Location location = locationService.getLocationByIdx(locationIdx);
-        List<Cam> cams = camService.getCamsByLocation(location);
+        try {
 
-        List<ReturnCamDto> returnCamDtos = cams.stream()
-                .map(ReturnCamDto::new)
-                .toList();
+            Location location = locationService.getLocationByIdx(locationIdx);
+            List<Cam> cams = camService.getCamsByLocation(location);
 
-        return ResponseEntity.ok(new Result<>(returnCamDtos));
+            List<ReturnCamDto> returnCamDtos = cams.stream()
+                    .map(ReturnCamDto::new)
+                    .toList();
+
+            return ResponseEntity.ok(new Result<>(returnCamDtos));
+        }catch (IllegalStateException e) {
+            return ResponseEntity.ok(new Result<>(e.getMessage(), true));
+        }
     }
 
     @PostMapping("/create")
     public ResponseEntity<?> createCam(@Valid @RequestBody CreateCamDto createCamDto) {
-        Cam cam = camService.createCam(createCamDto);
+        try {
 
-        return ResponseEntity.ok(new Result<>(cam));
+            Cam cam = camService.createCam(createCamDto);
+
+            return ResponseEntity.ok(new Result<>(cam));
+        }catch (IllegalStateException e) {
+            return ResponseEntity.ok(new Result<>(e.getMessage(), true));
+        }
     }
 
     @PutMapping("/update")
     public ResponseEntity<?> updateCam(@Valid @RequestBody UpdateCamDto updateCamDto) {
-        Cam cam = camService.getCamByIdx(updateCamDto.getIdx());
+        try {
 
-        cam.modifiedCam(cam.getName(), cam.getIp());
+            Cam cam = camService.getCamByIdx(updateCamDto.getIdx());
 
-        camService.updateCamBy(cam);
+            cam.modifiedCam(cam.getName(), cam.getIp());
 
-        return ResponseEntity.ok(new Result<>(cam));
+            camService.updateCamBy(cam);
+
+            return ResponseEntity.ok(new Result<>(cam));
+        }catch (IllegalStateException e) {
+            return ResponseEntity.ok(new Result<>(e.getMessage(), true));
+        }
     }
 }
