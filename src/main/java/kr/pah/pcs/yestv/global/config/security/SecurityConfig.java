@@ -26,13 +26,14 @@ public class SecurityConfig {
                 .authorizeHttpRequests(req -> {
                     req
                             .requestMatchers("/login", "/logout", "/register").permitAll()
+                            .requestMatchers("/static/**").permitAll()
                             .anyRequest().authenticated();
                 })
                 .formLogin(loginConfigurer -> {
                     loginConfigurer
-                            .loginPage("/login")
+                            .loginPage("/login").permitAll()
                             .usernameParameter("email")
-                            .loginProcessingUrl("/login")
+                            .loginProcessingUrl("/login").permitAll()
                             .defaultSuccessUrl("/");
                 });
         return http.build();

@@ -2,6 +2,10 @@ spring:
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
+    check-template-location: true
+    cache: false
+  mvc:
+    static-path-pattern: "/static/**"
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:tcp://localhost/~/yes_tv
