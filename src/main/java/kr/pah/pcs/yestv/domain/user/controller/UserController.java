@@ -8,8 +8,10 @@ import kr.pah.pcs.yestv.domain.user.dto.UpdateUserDto;
 import kr.pah.pcs.yestv.domain.user.entity.User;
 import kr.pah.pcs.yestv.domain.user.service.UserService;
 import kr.pah.pcs.yestv.global.common.Result;
+import kr.pah.pcs.yestv.global.common.Util;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,8 +20,10 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
+    private final Util util;
+    private final PasswordEncoder pwdEncoder;
 
-    @GetMapping("/get-ser/{idx}")
+    @GetMapping("/get-user/{idx}")
     public ResponseEntity<?> getUserById(@Valid @PathVariable int idx) {
         try {
             User user = userService.getUserByIdx(idx);
@@ -54,18 +58,43 @@ public class UserController {
 
     @PutMapping("/update")
     public ResponseEntity<?> updateUser(@RequestBody UpdateUserDto updateUserDto) {
-//        try {
-//          로그인된 user객체를 가져와 수정하는 코드
+        try {
+            User user = util.getLoginUser();
 
-//            userService.updateUser()
-//        }
-        return ResponseEntity.ok(new Result<>("test"));
+            updateUserDto.setPassword(pwdEncoder.encode(updateUserDto.getPassword()));
+
+            user.updateUser(updateUserDto);
+
+            userService.updateUser(user);
+            return ResponseEntity.ok(new Result<>("성공적으로 정보가 변경되었습니다."));
+        }catch (IllegalStateException e) {
+            return ResponseEntity.ok(new Result<>(e.getMessage(), true));
+        }
     }
 
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteUser() {
-//        로그인 되어있는 유저의 isDelete true로 바꾸는 로직
-        return ResponseEntity.ok(new Result<>("test"));
+        try {
+            User user = util.getLoginUser();
+
+            userService.deleteUser(user);
+
+            return ResponseEntity.ok(new Result<>("정상적으로 삭제되었습니다."));
+        }catch (IllegalStateException e) {
+            return ResponseEntity.ok(new Result<>(e.getMessage(), true));
+        }
+    }
+
+    @DeleteMapping("/delete/{idx}")
+    public ResponseEntity<?> deleteUserByIdx(@Valid @PathVariable int idx) {
+        try {
+
+            userService.deleteUser(idx);
+
+            return ResponseEntity.ok(new Result<>("정상적으로 삭제되었습니다."));
+        }catch (IllegalStateException e) {
+            return ResponseEntity.ok(new Result<>(e.getMessage(), true));
+        }
     }
 
 }
