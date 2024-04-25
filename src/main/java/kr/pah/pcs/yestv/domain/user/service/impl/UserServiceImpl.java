@@ -6,6 +6,7 @@ import kr.pah.pcs.yestv.domain.user.entity.User;
 import kr.pah.pcs.yestv.domain.user.repository.UserRepository;
 import kr.pah.pcs.yestv.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder pwdEncoder;
 
     @Override
     public User createUser(CreateUserDto createUserDto) {
@@ -20,8 +22,7 @@ public class UserServiceImpl implements UserService {
         User user = User.builder()
                 .username(createUserDto.getUsername())
                 .nickname(createUserDto.getNickname())
-//               시큐리티 적용후 암호화 적용
-                .password(createUserDto.getPassword())
+                .password(pwdEncoder.encode(createUserDto.getPassword()))
                 .email(createUserDto.getEmail())
                 .build();
 
@@ -42,6 +43,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(int idx) {
-        userRepository.deleteById(idx);
+        getUserByIdx(idx).changeDelete();
+    }
+
+    @Override
+    public void deleteUser(User user) {
+        user.changeDelete();
     }
 }
