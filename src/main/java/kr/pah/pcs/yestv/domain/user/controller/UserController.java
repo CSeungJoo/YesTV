@@ -29,8 +29,29 @@ public class UserController {
             User user = userService.getUserByIdx(idx);
 
             ReturnUserDto returnUserDto = ReturnUserDto.builder()
+                    .idx(user.getIdx())
                     .username(user.getUsername())
                     .nickname(user.getNickname())
+                    .email(user.getEmail())
+                    .role(user.getRole())
+                    .build();
+
+            return ResponseEntity.ok(new Result<>(returnUserDto));
+        }catch (IllegalStateException e) {
+            return ResponseEntity.ok(new Result<>(e.getMessage(), true));
+        }
+    }
+
+    @GetMapping("/get-login-user")
+    public ResponseEntity<?> getLoginUser() {
+        try {
+
+            User user = util.getLoginUser();
+
+            ReturnUserDto returnUserDto = ReturnUserDto.builder()
+                    .idx(user.getIdx())
+                    .nickname(user.getNickname())
+                    .username(user.getUsername())
                     .email(user.getEmail())
                     .role(user.getRole())
                     .build();
@@ -46,6 +67,7 @@ public class UserController {
         User user = userService.createUser(createUserDto);
 
         ReturnUserDto returnUserDto = ReturnUserDto.builder()
+                .idx(user.getIdx())
                 .username(user.getUsername())
                 .nickname(user.getNickname())
                 .email(user.getEmail())
