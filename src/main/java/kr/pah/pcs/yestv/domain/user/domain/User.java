@@ -1,4 +1,4 @@
-package kr.pah.pcs.yestv.domain.user.entity;
+package kr.pah.pcs.yestv.domain.user.domain;
 
 import jakarta.persistence.*;
 import kr.pah.pcs.yestv.domain.location.domain.Location;
@@ -40,11 +40,11 @@ public class User {
     @Column
     private boolean isActive;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "video_id")
     private List<Video> videos;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "location_id")
     private Location location;
 

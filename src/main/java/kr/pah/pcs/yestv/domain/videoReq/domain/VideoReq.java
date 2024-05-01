@@ -2,11 +2,10 @@ package kr.pah.pcs.yestv.domain.videoReq.domain;
 
 import jakarta.persistence.*;
 import kr.pah.pcs.yestv.domain.location.domain.Location;
-import kr.pah.pcs.yestv.domain.user.entity.User;
+import kr.pah.pcs.yestv.domain.user.domain.User;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -30,11 +29,11 @@ public class VideoReq {
     @Column
     private LocalDateTime endTime;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "location_id")
     private Location location;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_id")
     private User user;
 
