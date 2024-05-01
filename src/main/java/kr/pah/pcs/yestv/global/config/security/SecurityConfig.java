@@ -1,5 +1,6 @@
 package kr.pah.pcs.yestv.global.config.security;
 
+import kr.pah.pcs.yestv.global.config.security.handler.LoginFailureHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -28,10 +29,10 @@ public class SecurityConfig {
                         .requestMatchers("/", "/login", "/logout", "/user/create").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(loginConfigurer -> loginConfigurer
-                        .loginPage("/login").permitAll()
                         .loginProcessingUrl("/loginProc")
                         .usernameParameter("username")
-                        .defaultSuccessUrl("/"))
+                        .defaultSuccessUrl("/")
+                        .failureHandler(new LoginFailureHandler()))
                 .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer
                         .logoutSuccessUrl("/")
                 )
