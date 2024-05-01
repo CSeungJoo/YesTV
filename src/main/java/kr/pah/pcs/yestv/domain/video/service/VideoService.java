@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface VideoService {
 
-    Video createVideo(MultipartFile video, Cam cam);
+    Video createVideo(MultipartFile video, Cam cam, LocalDateTime start);
     Video getVideoByIdx(int idx);
 
     byte[] getVideoFileByIdx(int idx);

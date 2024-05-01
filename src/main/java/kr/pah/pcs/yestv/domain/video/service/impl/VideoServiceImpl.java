@@ -33,12 +33,12 @@ public class VideoServiceImpl implements VideoService {
     private String uploadDir;
 
     @Override
-    public Video createVideo(MultipartFile video, Cam cam) {
+    public Video createVideo(MultipartFile video, Cam cam, LocalDateTime startTime) {
         String url = video.getOriginalFilename().substring(video.getOriginalFilename().lastIndexOf("."));
 
         Video createVideo = Video.builder()
-                .startTime(LocalDateTime.parse(video.getOriginalFilename()))
-                .endTime(LocalDateTime.parse(video.getOriginalFilename()).plusMinutes(10))
+                .startTime(startTime)
+                .endTime(startTime.plusMinutes(10))
                 .url(UUID.randomUUID() + url)
                 .cam(cam)
                 .build();
