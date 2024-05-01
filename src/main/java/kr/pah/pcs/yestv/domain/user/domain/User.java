@@ -40,11 +40,11 @@ public class User {
     @Column
     private boolean isActive;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "video_id")
     private List<Video> videos;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "location_id")
     private Location location;
 
