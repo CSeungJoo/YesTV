@@ -5,7 +5,7 @@ import kr.pah.pcs.yestv.domain.cam.domain.Cam;
 import kr.pah.pcs.yestv.domain.cam.service.CamService;
 import kr.pah.pcs.yestv.domain.location.domain.Location;
 import kr.pah.pcs.yestv.domain.location.service.LocationService;
-import kr.pah.pcs.yestv.domain.user.entity.User;
+import kr.pah.pcs.yestv.domain.user.domain.User;
 import kr.pah.pcs.yestv.domain.video.domain.Video;
 import kr.pah.pcs.yestv.domain.video.dto.ReturnVideoDto;
 import kr.pah.pcs.yestv.domain.video.service.VideoService;

@@ -1,11 +1,10 @@
 package kr.pah.pcs.yestv.domain.user.controller;
 
-import jakarta.annotation.security.PermitAll;
 import jakarta.validation.Valid;
 import kr.pah.pcs.yestv.domain.user.dto.CreateUserDto;
 import kr.pah.pcs.yestv.domain.user.dto.ReturnUserDto;
 import kr.pah.pcs.yestv.domain.user.dto.UpdateUserDto;
-import kr.pah.pcs.yestv.domain.user.entity.User;
+import kr.pah.pcs.yestv.domain.user.domain.User;
 import kr.pah.pcs.yestv.domain.user.service.UserService;
 import kr.pah.pcs.yestv.global.common.Result;
 import kr.pah.pcs.yestv.global.common.Util;
@@ -63,22 +62,27 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> createUser(@RequestBody CreateUserDto createUserDto) {
-        User user = userService.createUser(createUserDto);
+    public ResponseEntity<?> createUser(@Valid @RequestBody CreateUserDto createUserDto) {
+        try {
 
-        ReturnUserDto returnUserDto = ReturnUserDto.builder()
-                .idx(user.getIdx())
-                .username(user.getUsername())
-                .nickname(user.getNickname())
-                .email(user.getEmail())
-                .role(user.getRole())
-                .build();
+            User user = userService.createUser(createUserDto);
 
-        return ResponseEntity.ok(new Result<>(returnUserDto));
+            ReturnUserDto returnUserDto = ReturnUserDto.builder()
+                    .idx(user.getIdx())
+                    .username(user.getUsername())
+                    .nickname(user.getNickname())
+                    .email(user.getEmail())
+                    .role(user.getRole())
+                    .build();
+
+            return ResponseEntity.ok(new Result<>(returnUserDto));
+        }catch (IllegalStateException e) {
+            return ResponseEntity.ok(new Result<>(e.getMessage(), true));
+        }
     }
 
     @PutMapping("/update")
-    public ResponseEntity<?> updateUser(@RequestBody UpdateUserDto updateUserDto) {
+    public ResponseEntity<?> updateUser(@Valid @RequestBody UpdateUserDto updateUserDto) {
         try {
             User user = util.getLoginUser();
 

@@ -1,6 +1,6 @@
 package kr.pah.pcs.yestv.global.common;
 
-import kr.pah.pcs.yestv.domain.user.entity.User;
+import kr.pah.pcs.yestv.domain.user.domain.User;
 import kr.pah.pcs.yestv.global.config.security.auth.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;

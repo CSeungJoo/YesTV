@@ -1,6 +1,6 @@
 package kr.pah.pcs.yestv.domain.user.repository;
 
-import kr.pah.pcs.yestv.domain.user.entity.User;
+import kr.pah.pcs.yestv.domain.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

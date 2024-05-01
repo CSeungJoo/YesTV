@@ -1,6 +1,6 @@
 package kr.pah.pcs.yestv.global.config.security.auth;
 
-import kr.pah.pcs.yestv.domain.user.entity.User;
+import kr.pah.pcs.yestv.domain.user.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
