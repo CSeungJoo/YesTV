@@ -60,7 +60,9 @@ public class CamController {
 
             Cam cam = camService.createCam(createCamDto);
 
-            return ResponseEntity.ok(new Result<>(cam));
+            ReturnCamDto returnCamDto = new ReturnCamDto(cam);
+
+            return ResponseEntity.ok(new Result<>(returnCamDto));
         }catch (IllegalStateException e) {
             return ResponseEntity.ok(new Result<>(e.getMessage(), true));
         }
@@ -74,9 +76,11 @@ public class CamController {
 
             cam.modifiedCam(cam.getName(), cam.getIp());
 
-            camService.updateCamBy(cam);
+            Cam modifiedCam = camService.updateCamBy(cam);
 
-            return ResponseEntity.ok(new Result<>(cam));
+            ReturnCamDto returnCamDto = new ReturnCamDto(modifiedCam);
+
+            return ResponseEntity.ok(new Result<>(returnCamDto));
         }catch (IllegalStateException e) {
             return ResponseEntity.ok(new Result<>(e.getMessage(), true));
         }
