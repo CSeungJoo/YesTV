@@ -6,5 +6,5 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface LocationRepository extends JpaRepository<Location, Integer> {
-    Page<Location> findLocationsByDeleteIsFalse(Pageable pageable);
+    Page<Location> findLocationsByIsDeleteIsFalse(Pageable pageable);
 }

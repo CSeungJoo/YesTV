@@ -41,7 +41,7 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public Page<Location> getLocations(Pageable pageable) {
-        return locationRepository.findLocationsByDeleteIsFalse(pageable);
+        return locationRepository.findLocationsByIsDeleteIsFalse(pageable);
     }
 
     @Override
