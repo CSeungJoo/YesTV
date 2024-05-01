@@ -18,6 +18,7 @@ public class ReturnCamDto {
     private String name;
     private String ip;
     private String detailedLocation;
+    private int locationId;
     private String locationName;
 
     public ReturnCamDto(Cam cam) {
@@ -25,6 +26,7 @@ public class ReturnCamDto {
         this.name = cam.getName();
         this.ip = cam.getIp();
         this.detailedLocation = cam.getDetailedLocation();
+        this.locationId = cam.getLocation().getIdx();
         this.locationName = cam.getLocation().getName();
     }
 }

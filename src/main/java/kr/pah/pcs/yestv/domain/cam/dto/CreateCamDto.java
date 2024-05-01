@@ -8,7 +8,6 @@ import lombok.Data;
 
 @Data
 @Builder
-@NotNull
 @AllArgsConstructor
 public class CreateCamDto {
     private String name;
