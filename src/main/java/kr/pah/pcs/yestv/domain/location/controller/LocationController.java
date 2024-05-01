@@ -14,6 +14,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/location")
@@ -42,7 +44,11 @@ public class LocationController {
         try {
             Page<Location> locations = locationService.getLocations(pageable);
 
-            return ResponseEntity.ok(new Result<>(locations));
+            List<ReturnLocationDto> returnLocationDtos = locations.stream()
+                    .map(ReturnLocationDto::new)
+                    .toList();
+
+            return ResponseEntity.ok(new Result<>(returnLocationDtos));
         }catch (IllegalStateException e) {
             return ResponseEntity.ok(new Result<>(e.getMessage(), true));
         }
