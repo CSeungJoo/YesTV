@@ -41,10 +41,11 @@ public class VideoServiceImpl implements VideoService {
                 .endTime(startTime.plusMinutes(10))
                 .url(UUID.randomUUID() + url)
                 .cam(cam)
+                .location(cam.getLocation())
                 .build();
 
         try {
-            Path path = Paths.get(createVideo.getUrl());
+            Path path = Paths.get(uploadDir += createVideo.getUrl());
             Files.write(path, video.getBytes());
         }catch (IOException e) {
             throw new IllegalStateException("동영상을 저장하지 못했습니다.");

@@ -19,9 +19,6 @@ public class Video {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idx;
 
-    @OneToOne
-    @JoinColumn(name = "cam_id")
-    private Cam cam;
 
     @Column
     private LocalDateTime startTime;
@@ -42,6 +39,10 @@ public class Video {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "location_id")
     private Location location;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cam_id")
+    private Cam cam;
 
     @PrePersist
     private void init() {

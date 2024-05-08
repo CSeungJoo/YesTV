@@ -74,7 +74,9 @@ public class VideoController {
         try {
             User user = util.getLoginUser();
 
-            List<Video> videos = user.getVideos();
+            List<ReturnVideoDto> videos = user.getVideos().stream()
+                    .map(ReturnVideoDto::new)
+                    .toList();
 
             return ResponseEntity.ok(new Result<>(videos));
         }catch (IllegalStateException e) {
@@ -85,11 +87,12 @@ public class VideoController {
     @PostMapping("/create")
     public ResponseEntity<?> createVideo(
             @Valid @RequestParam("videoFile") MultipartFile videoFile,
-            @Valid @RequestParam("camId") int camId) {
+            @Valid @RequestParam("camId") int camId,
+            @Valid @RequestParam("startTime") LocalDateTime startTime) {
         try {
             Cam cam = camService.getCamByIdx(camId);
 
-            Video video = videoService.createVideo(videoFile, cam);
+            Video video = videoService.createVideo(videoFile, cam, startTime);
 
             ReturnVideoDto returnVideoDto = new ReturnVideoDto(video);
 
